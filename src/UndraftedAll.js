@@ -1,17 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import Undrafted from './Undrafted'
+import Undrafted from "./Undrafted";
 
 function UndraftedAll(props) {
   return (
-    <div className='col-md-3 col-sm-12 col-xs-12'>
+    <div className="col-md-3 col-sm-12 col-xs-12">
       <div className="aid-title hidden-xs">
         <i className="fa fa-sort-amount-asc"></i> Overall Rankings
       </div>
 
       <div className="row form-group">
         <div className="form-group col-md-4">
-          <select value={ props.format } onChange={ props.fetch } >
+          <select value={props.format} onChange={props.fetch}>
             <option value="standard">Standard</option>
             <option value="ppr">PPR</option>
             <option value="half_ppr">0.5 PPR</option>
@@ -24,20 +24,37 @@ function UndraftedAll(props) {
             className="form-control"
             placeholder="Search"
             onChange={props.search}
-            value={ props.query }
+            value={props.query}
           />
         </div>
       </div>
 
-      <div className='scrollable overall-rankings'>
+      <div className="scrollable overall-rankings">
         <Undrafted
-          fields={['rank', 'tier', 'position', 'name', 'team']}
+          fields={[
+            "rank",
+            "tier",
+            "position",
+            "name",
+            "risk",
+            "vs_adp",
+            "team",
+            "salary",
+          ]}
           players={props.players}
           draft={(p) => props.draft(p)}
         />
       </div>
+
+      <div className="scrollable overall-rankings">
+        <Undrafted
+          fields={["rank", "tier", "position", "name", "team", "salary"]}
+          players={props.idp}
+          draft={(p) => props.draft(p)}
+        />
+      </div>
     </div>
-  )
+  );
 }
 
 UndraftedAll.propTypes = {
@@ -48,4 +65,4 @@ UndraftedAll.propTypes = {
   fetch: React.PropTypes.func.isRequired,
 };
 
-export default UndraftedAll
+export default UndraftedAll;
